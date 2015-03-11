@@ -3,20 +3,6 @@ require_relative 'models/card.rb'
 require_relative 'models/deck.rb'
 require_relative 'models/hand.rb'
 
-######
-#GAME#
-######
-
-# def hit_or_stand(decision)
-#   decision.upcase!
-#   if decision == "H"
-#
-#   elsif
-#
-#   else
-#     "That's not a valid decision. please reenter."
-# end
-
 DECK = Deck.new
 
 
@@ -27,6 +13,7 @@ DEALER_HAND = Hand.new("dealer")
 
 
 def hit_stand
+  
   puts "#{PLAYER_HAND.hand_owner} score: #{PLAYER_HAND.score}\n "
 
   if PLAYER_HAND.score > 21
@@ -76,11 +63,3 @@ puts "Feeling lucky punk?\n "
 2.times { PLAYER_HAND.add_to_hand(DECK.draw!) }
 
 hit_stand
-
-# while DEALER_HAND.score < 21
-#   if DEALER_HAND.score < 17
-#     DEALER_HAND.add_to_hand(deck.draw!)
-#   elsif DEALER_HAND.score >
-#   end
-#   puts "#{DEALER_HAND.hand_owner} score: #{DEALER_HAND.score}\n "
-# end
