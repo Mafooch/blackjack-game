@@ -3,31 +3,28 @@ require_relative 'models/card.rb'
 require_relative 'models/deck.rb'
 require_relative 'models/hand.rb'
 
-DECK = Deck.new
+@deck = Deck.new
 
 
-PLAYER_HAND = Hand.new("player")
-DEALER_HAND = Hand.new("dealer")
-
-
-
+@player_hand = Hand.new("player")
+@dealer_hand = Hand.new("dealer")
 
 def hit_stand
-  
-  puts "#{PLAYER_HAND.hand_owner} score: #{PLAYER_HAND.score}\n "
 
-  if PLAYER_HAND.score > 21
+  puts "#{@player_hand.hand_owner} score: #{@player_hand.score}\n "
+
+  if @player_hand.score > 21
     puts "Bust! Game over..."
   else
     print "Hit or stand (H/S): "
     decision = gets.chomp.upcase!
     if decision == "H"
       puts "#{decision}"
-      PLAYER_HAND.add_to_hand(DECK.draw!)
+      @player_hand.add_to_hand(@deck.draw!)
       hit_stand
     elsif decision == "S"
       puts "#{decision}"
-      2.times { DEALER_HAND.add_to_hand(DECK.draw!) }
+      2.times { @dealer_hand.add_to_hand(@deck.draw!) }
       dealer_move
     else
       puts "#{decision} is not a valid decision. Please choose again."
@@ -37,12 +34,12 @@ def hit_stand
 end
 
 def dealer_move
-  puts "#{DEALER_HAND.hand_owner} score: #{DEALER_HAND.score}\n "
+  puts "#{@dealer_hand.hand_owner} score: #{@dealer_hand.score}\n "
 
-  if DEALER_HAND.score > 21
+  if @dealer_hand.score > 21
     puts "You win!!"
-  elsif DEALER_HAND.score < 17
-    DEALER_HAND.add_to_hand(DECK.draw!)
+  elsif @dealer_hand.score < 17
+    @dealer_hand.add_to_hand(@deck.draw!)
     dealer_move
   else
     compare
@@ -50,9 +47,9 @@ def dealer_move
 end
 
 def compare
-  if PLAYER_HAND.score > DEALER_HAND.score
+  if @player_hand.score > @dealer_hand.score
     puts "You win!!!"
-  elsif PLAYER_HAND.score == DEALER_HAND.score
+  elsif @player_hand.score == @dealer_hand.score
     puts "You tied!!"
   else
     puts "You lose!!"
@@ -60,6 +57,6 @@ def compare
 end
 
 puts "Feeling lucky punk?\n "
-2.times { PLAYER_HAND.add_to_hand(DECK.draw!) }
+2.times { @player_hand.add_to_hand(@deck.draw!) }
 
 hit_stand
